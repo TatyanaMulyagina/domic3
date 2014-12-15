@@ -2,92 +2,128 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models');
 
-router.post('/testedit/addgroup', function (req, res) {
-    //console.log(req.body.inputname)
-    db.TestGroup.create({name: req.body.inputname}).success(function(testgroup){
-        res.redirect('/test/:idTest/edit/testedit');
-    });
-})
-
 //router.param('idTest', /^[0-9]+$/);
 //router.param('idGroup', /^\d+$/);
 ///test/:idTest/:idGroup/edit/
 //req.params.idTest
 //req.params.idGroup
 
-router.get('/testedit', function (req, res) {
-    db.TestGroup.findAll().success(function(groups) {
-        res.render('users/test',{groups: groups})
+//список групп
+router.get('/groups', function (req, res) {
+    db.TestGroup.findAll().success(function (groups) {
+        res.render('testEdit/test', {groups: groups})
     });
 })
 
+//добавить группу
+router.post('/groups/add', function (req, res) {
+    //console.log(req.body.inputname)
+    db.TestGroup.create({name: req.body.inputname}).success(function (testgroup) {
+        res.redirect('/test/groups');
+    });
+})
 
-router.get('/testedit/del/:id', function (req, res) {
-    db.TestGroup.find(req.params.id).success(function(group) {
-        group.destroy({}).success(function() {
+//удаление группы
+router.get('/groups/:idTestGroup', function (req, res) {
+    db.TestGroup.find(req.params.idTestGroup).success(function (group) {
+        group.destroy({}).success(function () {
+            res.send("OK");
+        })
+    })
+})
+
+//изменение названия группы
+router.post('/groups/:idTestGroup/questions/editGroupQues', function (req, res) {
+    db.TestGroup.find(req.params.idTestGroup).success(function (group) {
+        group.updateAttributes({
+            name: req.body.inputname
+        }).success(function () {
+            res.redirect('/test/groups/' + req.params.idTestGroup + '/questions')
+        })
+    })
+})
+//изменение формулировки вопроса(пока так)
+//не реализовано
+router.post('/groups/:idTestGroup/questions/:idQuestion/edit', function (req, res) {
+    db.TestQuestion.find(req.params.idQuestion).success(function (question) {
+        question.updateAttributes({
+            text:req.body.inputname
+        }).success(function () {
+            res.redirect('/test/groups/' + req.params.idTestGroup + '/questions/'+req.params.idQuestion+'/edit')
+        })
+    })
+
+})
+
+//редактирование вопроса(не реализовано)
+router.get('/groups/:idTestGroup/questions/:idQuestion/edit', function (req, res) {
+    db.TestGroup.find(req.params.idTestGroup).success(function (group) {
+        db.TestQuestion.find(req.params.idQuestion).success(function (question) {
+            console.log("GHBFDBJHJ" + JSON.stringify(question))
+            res.render('testEdit/modal_changeQuestion', {group:group,question: question})
+        })
+     })
+})
+
+//Отображение вопросов группы
+router.get('/groups/:idTestGroup/questions', function (req, res) {
+    db.TestGroup.find(req.params.idTestGroup).success(function (group) {
+        group.getTestQuestions().success(function (question) {
+            res.render('testEdit/list_Questions', {group: group, question: question})
+        })
+    })
+})
+
+//не реализовано удаление вопросов(checkbox)
+router.get('/testedit/:idTestGroup/questions/del/:idQuestion', function (req, res) {
+    db.TestQuestion.find(req.params.idTestGroup).success(function (question) {
+        question.destroy({}).success(function () {
             res.send("OK");
         })
     })
 
 })
 
-router.get('/testedit/:idGroup/questions', function (req, res) {
-        res.render('users/list_Questions')
-})
-
-
-router.post('/testedit/addgroup/:idGroup', function (req, res) {
+//создание вопросов(одновыборный, многовыборный)
+//не реализован открытый
+router.post('/groups/:idTestGroup/questions', function (req, res) {
     db.TestQuestion.create(
         {
-          text: req.body.inputtext,
-          type: req.body.AnswerType
-        }).success(function(items) {
-        db.TestGroup.find(req.params.idGroup).success(function(group) {
-            group.addTestQuestion(items).success(function(question) {
-                if (req.body.AnswerType == "One") {
-                    db.TestAnswerChoice.bulkCreate([
-                        req.body.inputTestAnswerOneChoice.map(function(el,i) {
+            text: req.body.inputtext,
+            type: req.body.AnswerType
+        }).success(function (items) {
+            db.TestGroup.find(req.params.idTestGroup).success(function (group) {
+                group.addTestQuestion(items).success(function (question) {
+                    if (req.body.AnswerType == "OneChoice") {
+                        var answers = req.body.inputTestAnswerOneChoice.map(function (el, i) {
                             return {
                                 answer: el,
-                                correct: i == req.body.inputTestAnswerOneChoiceCorrect
+                                isCorrect: i == req.body.inputTestAnswerOneChoiceCorrect,
+                                TestQuestionId: question.id
                             }
-                        })]).success(function (answers) {
+                        });
+                        db.TestAnswerChoice.bulkCreate(answers).success(function (answers) {
+                                res.redirect('/test/groups');
+                            }
+                        )
+                    }
 
-                            db.TestAnswerChoice.findAll({}).success(function(obj){
-                                obj.forEach(function(el){
-                                    console.log("!!!!!!!!!!!!44444444 "+JSON.stringify(obj))
-                                    el.setQuestions([question]).success(function (qw) {
-                                    });
-                                })
-                                console.log("!!!!!!!!!!!!!!!! "+JSON.stringify(obj))
-                            })
-                            res.redirect('/test/:idTest/edit/testedit');
-                        }
-                    )
-                }
+                    if (req.body.AnswerType == "ManyChoice") {
+                        var answers = req.body.inputTestAnswerManyChoice.map(function (el, ind) {
+                            return {
+                                answer: el,
+                                isCorrect: ind == req.body.inputTestAnswerManyChoiceCorrect.indexOf(ind.toString()) >= 0,
+                                TestQuestionId: question.id
+                            }
+                        });
+                        db.TestAnswerChoice.bulkCreate(answers).success(function (answers) {
+                                res.redirect('/test/groups');
+                            }
+                        )
+                    }
+                })
             })
-        })
         })
 })
 
-
-
-
 module.exports = router;
-
-/*if (req.body.AnswerType == "One") {
- db.TestAnswerChoice.create(
- req.body.inputTestAnswerOneChoice.map(function(el,i) { return {
- answer: el,
- correct: i == req.body.inputTestAnswerOneChoiceCorrect
- }})).success(function (answers) {
- // console.log("answrs " + JSON.stringify(answers));
- //console.log("question " + JSON.stringify(questions));
- //console.error(questions);
- answers.forEach(function(el){el.setQuestion(questions[0], function (q) {
- });
- })
- res.redirect('/test/:idTest/edit/testedit');
- }
- );
- }*/

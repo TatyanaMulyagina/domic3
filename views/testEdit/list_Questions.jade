@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+    script(src='/javascripts/testEdit.js')
+    nav(class="navbar navbar-default" role="navigation")
+        div(class="container-fluid")
+            div(class="navbar-header")
+                a(class="navbar-brand") Название группы
+            form(class="navbar-form navbar-left",method="post",style='width:85%',action="/test/groups/#{group.id}/questions/editGroupQues")
+                div.form-group
+                    input(type="text",name='inputname', class="form-control", value="#{group.name}",style='width:95%')
+                button(title="save",type="submit" class="btn btn-default",style='width:4%')
+                    span(class="glyphicon glyphicon-saved")
+                a(href="/test/groups/")
+                    button(type="button" class="btn btn-link",style='width:15%') Список групп
+    h4 Вопросы группы
+    p
+    table#questionsTable(class="table")
+        thead
+            tr(class="info")
+                th.text-center(style='width:5%') №
+                th.text-center(style='width:15%') Тип
+                th Tекст вопроса
+                th.text-center(style='width:15%') Действия
+        tbody
+            each ques in question
+                tr
+                  td.text-center(style='width:10%') #{ques.id}
+                  td.text-center(style='width:10%') #{ques.type}
+                  td #{ques.text.length > 70 ? ques.text.substr(0,70) + '...': ques.text}
+                  td.text-center(style='width:20%')
+                    a(href="/test/groups/#{group.id}/questions/#{ques.id}/edit" class="navbar-link")
+                      button(title="edit",type="button",class="btn btn-link", aligin="right", onclick="TestCreator.preEditStudy1("+group.id+","+ques.id+")")
+                          span(class="glyphicon glyphicon-pencil")
+                      input(type="checkbox")
+    button(title="delete",type="button",class="btn alert-danger", data-toggle="modal", data-target="") Удалить

@@ -1,16 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
-    var complexRights = {};
-    var TestAnswerChoice = sequelize.define('TestAnswerChoice', {
+    return sequelize.define('TestAnswerChoice', {
         answer:DataTypes.STRING,
         isCorrect:DataTypes.BOOLEAN
 
     }, {
         classMethods: {
             associate: function(models) {
-                models.TestQuestion.hasOne(TestAnswerChoice,{as:"question"});
+                models.TestAnswerChoice.belongsTo(models.TestQuestion);
             }
         }
     });
-
-    return TestAnswerChoice;
 };
