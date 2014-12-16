@@ -1,0 +1,8 @@
+html
+  body
+    form(action='handler.php', onreset='return confirm(\'Очистить форму?\')')
+      p Введите ваше имя
+      p
+        input(type='text', name='user')
+      input(type='reset', value='Очистить')
+

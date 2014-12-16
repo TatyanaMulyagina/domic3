@@ -1,0 +1,17 @@
+div(class="modal  fade", id="AddStudy", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+    div.modal-dialog
+        div.modal-content
+            div.modal-header
+                button(type="button", class="close", data-dismiss="modal", aria-hidden="true")
+                    span(class="glyphicon glyphicon-remove")
+                h4.modal-title(id="myModalLabel") Создание группы
+            div.modal-body
+                form(class="form-horizontal", role="form",method="post", action="/test/:idTest/edit/testedit/addgroup")
+                    div.form-group
+                        label(for="inputname", class="col-sm-2 control-label") Название группы
+                        div.col-sm-10
+                            input(type="text", class="form-control", name="inputname", placeholder="")
+                    div.modal-footer
+                        button(type="submit", class="btn btn-default") Создать &nbsp
+                            span(class="glyphicon glyphicon-ok")
+                        button(type="button", class="btn btn-default", data-dismiss="modal") Отмена

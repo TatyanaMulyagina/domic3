@@ -1,0 +1,22 @@
+{
+  "name": "domic3",
+  "version": "0.0.1",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "2.1.0",
+    "bootstrap": "3.2.0",
+    "ace": "*",
+    "jade": "*"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

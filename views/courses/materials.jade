@@ -1,0 +1,12 @@
+extends ../layout
+block content
+    h3 #{parentName}
+    div(class="panel panel-default")
+        div(class="panel-heading") Модули
+        div(class="panel-body")
+            ol
+                each mat, index in mats
+                  include ./materialElem.jade
+    include ./materialDescription.jade
+
+                        

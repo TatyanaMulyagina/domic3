@@ -1,0 +1,59 @@
+extends ../../layout
+link(href='/bower/bootstrap/dist/css/bootstrap.min.css',rel='stylesheet')
+block content
+    h4 Создание текстового материала
+    button(class="btn", data-toggle="modal", data-target="#AddStudy", aligin="right", id="Prewie") Предосмотр &nbsp
+        span(class="glyphicon glyphicon-search")
+    div(class="modal  fade", id="AddStudy", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button(type="button", class="close", data-dismiss="modal", aria-hidden="true") X
+                    h4.modal-title(id="myModalLabel") Добавить студента
+                div.modal-body(id="prew")
+                div.modal-footer
+                    button(type="button", class="btn btn-default", data-dismiss="modal") close
+    form.form-horizontal(role='form' method="post",action="/materials/textmaterial_create")
+        .form-group
+            label.col-sm-2.control-label(for='name') Имя
+            .col-sm-8
+                input.form-control(type='text' name="InputName", id="InputName" placeholder='Имя')
+        .form-group
+            .col-sm-offset-2.col-sm-8
+                label.radio-inline
+                    input(id="htmlch",type='radio', name='optionsRadios', value='html' checked)
+                    | HTML
+                label.radio-inline
+                    input(id="markdownch",type='radio', name='optionsRadios', value='markdown')
+                    | Markdown
+        input(type="textarea",class="form-control",id="InputText", name="InputText",style="display:none")
+        .form-group
+            .col-sm-offset-2.col-sm-8
+                 pre(id="editor")
+        button(type="submit",id="save",class="btn btn-default") Submit
+        script(src="/bower/ace/build/src/ace.js")
+        script(type='text/javascript').
+          var editor = ace.edit("editor");
+          editor.session.setMode("/bower/ace/lib/mode/html");
+             // enable emmet on the current editor
+          editor.setTheme("bower/ace/lib/ace/theme/twilight");
+          editor.setOption("enableEmmet", true);
+          editor.setAutoScrollEditorIntoView(true);
+          editor.setOption("maxLines", 30);
+          editor.setOption("minLines", 30);
+          editor.getSession().setUseSoftTabs(true);
+          $('#save').bind('click', function(){
+              $('#InputText').attr("value",editor.getValue())
+          });
+          $('#markdownch').bind(function(){
+              editor.session.setMode("/bower/ace/lib/mode/markdown");
+              edidor.setValue(" ")
+          })
+          $('#htmlch').change(function(){
+              editor.session.setMode("/bower/ace/lib/mode/html");
+          })
+          $('#Prewie').bind('click', function () {
+              $('#prew').html('');
+              $('#prew').append(editor.getValue())
+          });
+        script(src="/bower/ace/build/src/ext-emmet.js")

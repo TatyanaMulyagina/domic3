@@ -1,0 +1,7 @@
+extends ../layout
+block content
+    h3 Курсы
+      button(class="btn btn-link", data-toggle="modal", aligin="left")
+        a(title="createCourse",class="glyphicon glyphicon-plus", href="#{curPath}create")
+    each crsArr, index in data
+        include ./coursePeriod.jade

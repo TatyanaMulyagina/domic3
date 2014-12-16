@@ -1,0 +1,37 @@
+extends ../layout
+
+include frame_OK_NO
+
+block scripts
+    script(src='/javascripts/testEdit.js')
+
+block content
+    include modals_createGroup
+    include modals_createQuestion
+
+    div(class="col-md-12")
+        h3 Создание и редактирование тестов
+        button(class="btn btn-link", data-toggle="modal", data-target="#AddStudy", aligin="right") Создать группу
+        p
+        include modals_createQuestion
+        table#groupsTable(class="table")
+            thead
+                tr(class="info")
+                    th Название группы
+                    th(aligin="right")
+            tbody
+                each group in groups
+                     tr(groupId=group.id)
+                        td #{group.name}
+                        td(align="right")
+
+                            +frame_ok_no(group.id)
+                            button(type="button", class="btn btn-link",data-toggle="modal", data-target="#EditStudy", onclick="TestCreator.preEditStudy("+group.id+")")
+                                span(title="add",class="glyphicon glyphicon-plus-sign")
+                            button(class="btn btn-link", data-toggle="modal", data-target="#select_delgroup", aligin="right")
+                                span(title="delete",class="glyphicon glyphicon-remove")
+                            a(href="/test/:idTest/edit/testedit/#{group.id}/questions" class="navbar-link")
+                             button(type="button",class="btn btn-link", data-toggle="modal", data-target="", aligin="right")
+                                span(title="list",class="glyphicon glyphicon-th-list")
+
+

@@ -1,0 +1,11 @@
+mixin frame_ok_no(group)
+    div(class="modal fade bs-example-modal-sm", id="select_delgroup", tabindex="-1", role="dialog", aria-labelledby="mySmallModalLabel", aria-hidden="true")
+        div.modal-dialog.modal-sm
+            div.modal-content
+                div.modal-header
+                    h4.modal-title(id="mySmallModalLabel",class="text-center") Подтверждение запроса
+                div.modal-body
+                    p(class="text-center") Вы действительно хотите удалить группу вопросов?
+                div.modal-footer
+                    button(type="button", class="btn btn-default pull-left btn-block", data-dismiss="modal", onclick="remove_gr("+group+")") Да
+                    button(type="button", class="btn btn-default pull-right btn-block", data-dismiss="modal",aligin="left") Нет

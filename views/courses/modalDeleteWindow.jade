@@ -1,0 +1,13 @@
+div(class="modal fade", id="deleteModal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+  div(class="modal-dialog")
+    div(class="modal-content")
+      div(class="modal-header")
+        button(type="button", class="close", data-dismiss="modal")
+          span(aria-hidden="true") &times
+          span(class="sr-only") Close
+        h4(class="modal-title", id="myModalLabel") Удаление курса
+      div(class="modal-body") Вы уверены, что хотите удалить этот курс?
+      div(class="modal-footer")
+        button(class="btn btn-danger", data-toggle="modal", data-target="", type="submit", formmethod="post", formaction='/courses/#{data.id}/remove') Die Monster!!!
+        button(type="button", class="btn btn-default", data-dismiss="modal") О, нет! Я передумал!
+

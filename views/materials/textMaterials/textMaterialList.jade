@@ -1,0 +1,16 @@
+﻿extends ../../layout
+link(href='/bower/bootstrap/dist/css/bootstrap.min.css',rel='stylesheet')
+block content
+    h4 Список материалов
+    table(class="table")
+      thead
+        tr(class="info")
+          th №
+          th Имя
+      tbody
+      - for(var x = 0; x <TextMat.length; x++)
+        tr
+          td #{x + 1}
+          td
+              a(href="/materials/textMaterial/"+ TextMat[x].id) #{TextMat[x].Name}
+

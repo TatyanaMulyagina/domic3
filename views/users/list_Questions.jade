@@ -1,0 +1,27 @@
+extends ../layout
+block scripts
+    script(src='/javascripts/testEdit.js')
+block content
+    div(class="col-md-12")
+        h3 Вопросы группы
+        p
+        table#questionsTable(class="table")
+            thead
+                tr(class="info")
+                    th.text-center №
+                    th.text-center(text-align="right") Тип
+                    th.text-center(text-align="center") Tекст вопроса
+                    th.text-center(text-align="center") Действия
+                tbody
+                td.text-center 1
+                td.text-center One
+                td.text-center блабла
+                td.text-center
+                  button(type="button",class="btn btn-link", data-toggle="modal", data-target="", aligin="right")
+                      span(class="glyphicon glyphicon-pencil")
+                  button(type="button",class="btn btn-link", data-toggle="modal", data-target="", aligin="right")
+                      span(title="delete",class="glyphicon glyphicon-remove")
+                //each questions in questions
+                    tr(groupId=group.id)
+                //        td #{group.name}
+                        td(align="right")

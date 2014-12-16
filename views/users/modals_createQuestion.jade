@@ -1,0 +1,67 @@
+div(class="modal  fade", id="EditStudy", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+    div.modal-dialog
+        div.modal-content
+            div.modal-header
+                button(type="button", class="close", data-dismiss="modal", aria-hidden="true")
+                    span(class="glyphicon glyphicon-remove")
+                h4.modal-title(id="myModalLabel",align="left") Cоздание вопроса
+            div.modal-body
+                form(id="EditStudy_form" class="form-horizontal", role="form",method="post", action="/test/:idTest/edit/testedit/addgroup/")
+                    div.form-group
+                        label(for="inputtext", class="col-sm-2 control-label") Текст вопроса
+                        div.col-sm-10
+                            textarea(rows="3",type="text", class="form-control", name="inputtext", placeholder="Текст...")
+                    div.form-group
+                        div.col-sm-10
+                            input(id="setType",type="hidden",name="AnswerType",value="")
+                    div.form-group
+                        div.col-sm-12
+                            div.tabbable.tabs
+                                ul.nav.nav-tabs
+                                    li
+                                        a(href="#TestAnswerOpen",data-toggle="tab",onclick="TestCreator.ChoiceType('Open')") TestAnswerOpen
+                                    li
+                                        a(href="#TestAnswerOneChoice",data-toggle="tab",onclick="TestCreator.ChoiceType('One')") TestAnswerOneChoice
+                                    li
+                                        a(href="#TestAnswerManyChoice",data-toggle="tab",onclick="TestCreator.ChoiceType('Many')") TestAnswerManyChoice
+                    div.tab-content
+                        div.tab-pane#TestAnswerOpen
+                            div.form-group
+                                div.col-sm-12
+                                    select(class="form-control", name="inputtypeanswer")
+                                        option Auto
+                                        option Manual
+
+                            textarea(rows="3", type="text", class="form-control", name="inputTestAnswerOpen[]", placeholder="Ответ в виде регулярного выражения...")
+
+                        div.tab-pane#TestAnswerOneChoice
+                            div.input-group
+                                span.input-group-addon
+                                    input(type="radio", name="inputTestAnswerOneChoiceCorrect",value="0")
+                                input(type="text", class="form-control",name="inputTestAnswerOneChoice[]")
+                            br
+                            div.input-group
+                                span.input-group-addon
+                                    input(type="radio", name="inputTestAnswerOneChoiceCorrect",value="1")
+                                input(type="text", class="form-control",name="inputTestAnswerOneChoice[]")
+
+                        div.tab-pane#TestAnswerManyChoice
+                            div.input-group
+                                span.input-group-addon
+                                    input(type="checkbox", name="inputTestAnswerManyChoiceCorrect[]",value="0")
+                                input(type="text", class="form-control",name="inputTestAnswerManyChoice[]")
+                            br
+                            div.input-group
+                                span.input-group-addon
+                                    input(type="checkbox", name="inputTestAnswerManyChoiceCorrect[]",value="1")
+                                input(type="text", class="form-control",name="inputTestAnswerManyChoice[]")
+                            br
+                            div.input-group
+                                span.input-group-addon
+                                    input(type="checkbox", name="inputTestAnswerManyChoiceCorrect[]",value="2")
+                                input(type="text", class="form-control",name="inputTestAnswerManyChoice[]")
+
+            div.modal-footer
+                button(type="submit", class="btn btn-default", form="EditStudy_form") Добавить &nbsp
+                   span(class="glyphicon glyphicon-ok")
+                button(type="button", class="btn btn-default", data-dismiss="modal") Отмена

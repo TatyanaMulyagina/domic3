@@ -1,0 +1,6 @@
+div(class="panel panel-default")
+    div(class="panel-heading") #{new Date(crsArr[0].beginAt).getFullYear()}
+    div(class="panel-body")
+        ol
+            each crs, subIndex in crsArr
+                include ./courseElem.jade
