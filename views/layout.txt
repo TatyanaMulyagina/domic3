@@ -10,7 +10,6 @@ html(lang='ru')
     script(src='/bower/jquery/dist/jquery.min.js')
     script(src='/bower/jquery-ui/jquery-ui.js')
     script(src='/bower/bootstrap/dist/js/bootstrap.min.js')
-    script(src='/bower/bootstrap/dist/js/bootstrap-select.min.js')
     script(src='/bower/jade/runtime.js')
     script(src='/bower/modernizr/src/modernizr-custom.js')
     script(src='/bower/webshim-1.15.5/js-webshim/minified/polyfiller.js')
@@ -18,7 +17,6 @@ html(lang='ru')
     block scripts
 
     link(href='/bower/bootstrap/dist/css/bootstrap.min.css',rel='stylesheet')
-    link(href='/bower/bootstrap/dist/css/bootstrap-select.min.css',rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet", href="/bower/jquery-ui/jquery-ui.css")
     //link(rel="stylesheet", href="/resources/demos/style.css")
@@ -35,18 +33,18 @@ html(lang='ru')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') DOMIC#
+          a.navbar-brand(href='#') DOMIC#
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li.active
-              a(href='#') Р”РѕРјРѕР№
+              a(href='#') Домой
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | РљСѓСЂСЃС‹
+                | Курсы
                 span.caret
               ul.dropdown-menu(role='menu')
                 li
-                  a(href='/courses') РЎРїРёСЃРѕРє РєСѓСЂСЃРѕРІ
+                  a(href='/courses') Список курсов
                 li
                   a(href='#') Another action
                 li
@@ -59,7 +57,7 @@ html(lang='ru')
                   a(href='#') One more separated link
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | РђРєС‚СѓР°Р»СЊРЅРѕРµ
+                | Актуальное
                 span.caret
               ul.dropdown-menu(role='menu')
                 li
@@ -78,13 +76,13 @@ html(lang='ru')
           ul.nav.navbar-nav.navbar-right
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | Р’Р°СЃСЏ РџРµС‚СЂРѕРІ
+                | Вася Петров
                 span.caret
               ul.dropdown-menu(role='menu')
                 li
-                  a(href='#') РџСЂРѕС„РёР»СЊ
+                  a(href='#') Профиль
                 li
-                  a(href='#') Р’С‹С…РѕРґ
+                  a(href='#') Выход
 
 
     // Begin page content

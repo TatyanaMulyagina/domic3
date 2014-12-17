@@ -1,8 +1,8 @@
-var passport = require('passport');
+var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 
-var db = require('../models');
-var authRoutes = require('../routes/auth');
+var db = require('../models')
+var authRoutes = require('../routes/auth')
 
 module.exports.init = function(app, modules, events) {
   app.use(passport.initialize());
@@ -37,15 +37,13 @@ module.exports.init = function(app, modules, events) {
   ));
 
   app.post('/login',
-      passport.authenticate('local',
-          { successRedirect: '/',
-            failureRedirect: '/login',
-            failureFlash: true
-          }
-      )
+    passport.authenticate('local',
+      { successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+      }
+    )
   );
-
-
 
   app.use('/', authRoutes);
 };

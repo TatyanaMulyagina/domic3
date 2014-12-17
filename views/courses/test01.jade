@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/stylesheets/test01.css")
+    script(src="/javascripts/test01.js")
+    div(class="row")
+        div(id="panel01", class="panel panel-default connectedSortable ui-sortable col-md-5 whiteboard", role="tabpanel")
+            li(class="ui-sortable-handle material") Шаблон материала
+        div(id="panel02", class="col-md-2")
+        div(id="panel03", class="panel panel-default connectedSortable ui-sortable col-md-5 whiteboard", role="tabpanel")
+            li(class="ui-sortable-handle material") Item 1
+            li(class="ui-sortable-handle material") Item 2
+            include ./collapseElement
+            li(class="ui-sortable-handle material") Item 4
+            li(class="ui-sortable-handle material") Item 5

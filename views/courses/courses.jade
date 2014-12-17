@@ -1,7 +1,9 @@
 extends ../layout
+block styles
+    link(rel='stylesheet', href='/stylesheets/courses.css')
 block content
     h3 Курсы
-      button(class="btn btn-link", data-toggle="modal", aligin="left")
-        a(title="createCourse",class="glyphicon glyphicon-plus", href="#{curPath}create")
+        a(title="createCourse",class="btn btn-default btn-xs courses-linkelem", href="#{curPath}create")
+            span(class="glyphicon glyphicon-plus")
     each crsArr, index in data
         include ./coursePeriod.jade

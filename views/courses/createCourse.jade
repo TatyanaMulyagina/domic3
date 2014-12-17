@@ -2,6 +2,9 @@ extends ../layout
 block content
   div(class="panel-body") Создание курса
   form(role="form", method="post", id="createCourse", action='/courses/add')
+    script
+      $.webshims.setOptions('forms-ext', {types: 'date'});
+      $.webshims.polyfill('forms forms-ext');
     div(class="form-group")
       label Название
       input(class="form-control", type="text", name='name', placeholder="Enter name", form="createCourse")
@@ -11,6 +14,12 @@ block content
     div(class="form-group")
       label Дата окончания
       input(class="form-control", type='date', name='endAt', max='2100-12-31', min='1990-01-01', form="createCourse")
+    div(class="form-group")
+      label Основной материал
+      select(class="form-control selectpicker", name="mainMaterial", form="createCourse")
+        each mat in materials
+            option(value="#{mat.id}") #{mat.name}
+
     div(class="btn-group", role="group")
       button(class="btn btn-success", type="submit", form="createCourse") Создать
       button(class="btn btn-default", type="button", onclick = "window.history.back()", form="createCourse") Отменить

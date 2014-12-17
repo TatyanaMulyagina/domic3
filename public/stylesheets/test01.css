@@ -1,0 +1,28 @@
+.whiteboard{
+    padding-left: 0px;
+    padding-right: 0px;
+    list-style-type: none;
+    float: left;
+}
+.folder{
+    margin: 5px 5px 5px 5px;
+}
+.folderName{
+    font-size: 20px;
+}
+.folderBottom{
+    padding-bottom: 50px;
+}
+.material{
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    margin: 5px 5px 5px 5px;
+    padding: 5px;
+    font-size: 20px;
+    width: 250px;
+}

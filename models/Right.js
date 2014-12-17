@@ -1,18 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
   var complexRights = {};
-  return sequelize.define('Right', {
+  var Right = sequelize.define('Right', {
     name: DataTypes.STRING
   }, {
+    // CR --- Complex Right
     classMethods: {
-      registerComplexRight: function(name, fn) {
+      registerCR: function(name, fn) {
         complexRights[name] = fn;
       },
-      isComplexRight: function(name) {
+      isCR: function(name) {
         return complexRights[name] ? true : false
       },
-      runComplexRightFunction: function() {
+      runCRFunction: function() {
         complexRights[arguments[0]].apply(arguments.slice(1));
+      },
+      associate: function(models) {
+        Right.hasMany(models.User);
       }
     }
   });
+
+  return Right;
 };
