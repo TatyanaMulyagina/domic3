@@ -1,3 +1,25 @@
 extends ../layout
 block content
-  p asdfasdbcvbcvbcvbcvbcvb
+ h4 Создание пользователя
+  form.form-horizontal(role='form' method="post",action="/users/create")
+    .form-group
+      label.col-sm-2.control-label(for='name') Имя
+      .col-sm-8
+        input.form-control(type='text' name="InputName", id="InputName" placeholder='Имя')
+    .form-group
+      label.col-sm-2.control-label(for='LastName') Фамилия
+      .col-sm-8
+        input.form-control(type='text' name="InputLastName", id="InputLastName" placeholder='Фамилия')
+    .form-group
+      label.col-sm-2.control-label(for='MiddleName') Отчество
+      .col-sm-8
+        input.form-control(type='text' name="InputMiddleName", id="InputMiddleName" placeholder='Отчество')
+    .form-group
+      label.col-sm-2.control-label(for='Email') Email( будет использован как логин для входа )
+      .col-sm-8
+        input.form-control(type='email' name="InputMEmail", id="InputEmail" placeholder='email')
+    .form-group
+      label.col-sm-2.control-label(for='Password') Пароль
+      .col-sm-8
+        input.form-control(type='text' name="InputPassword", id="InputPassword" placeholder='Пароль')
+    button(type="submit",id="save",class="btn btn-default") Сохранить

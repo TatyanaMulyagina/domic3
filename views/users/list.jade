@@ -1,0 +1,25 @@
+//
+   Created by gerasim on 25.11.14.
+
+extends ../layout
+link(href='/bower/bootstrap/dist/css/bootstrap.min.css',rel='stylesheet')
+block content
+   h4 Список пользователей
+   table(class="table")
+      thead
+         tr(class="info")
+            th №
+            th ФИО
+            th
+      tbody
+      - for(var x = 0; x <Data.length; x++)
+        tr
+           td #{x + 1}
+           td #{Data[x].lastname} #{Data[x].Name} #{Data[x].middlename}
+           td
+              a(href="/users/del/"+Data[x].id)
+               span(class="glyphicon glyphicon-trash")
+           td
+              a(href="/users/user/"+Data[x].id)
+                 span(class="glyphicon glyphicon-pencil")
+
