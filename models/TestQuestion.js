@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
     var TestQuestion = sequelize.define('TestQuestion', {
         text:DataTypes.TEXT,
         type:DataTypes.ENUM('ManyChoice','OneChoice','Open')
-
     }, {
         classMethods: {
         },
@@ -13,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
                 console.log("asdasdf");
            }
         }
-
     });
 
     return TestQuestion;

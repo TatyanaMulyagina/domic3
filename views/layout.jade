@@ -8,15 +8,23 @@ html(lang='ru')
     meta(name='author', content='')
     // Bootstrap core JavaScript
     script(src='/bower/jquery/dist/jquery.min.js')
+    script(src='/bower/jquery-ui/jquery-ui.js')
     script(src='/bower/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/bower/bootstrap/dist/js/bootstrap-select.min.js')
     script(src='/bower/jade/runtime.js')
+    script(src='/bower/modernizr/modernizr.js')
+    script(src='/bower/webshim/js-webshim/minified/polyfiller.js')
+
     block scripts
 
     link(href='/bower/bootstrap/dist/css/bootstrap.min.css',rel='stylesheet')
+    link(href='/bower/bootstrap/dist/css/bootstrap-select.min.css',rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/bower/jquery-ui/jquery-ui.css")
+    //link(rel="stylesheet", href="/resources/demos/style.css")
     block styles
 
-    title= appName
+    title= title
   body
     // Fixed navbar
     .navbar.navbar-default.navbar-fixed-top(role='navigation')
@@ -27,7 +35,7 @@ html(lang='ru')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#')= appName
+          a.navbar-brand(href='/') DOMIC#
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li.active
@@ -75,7 +83,12 @@ html(lang='ru')
               ul.dropdown-menu(role='menu')
                 li
                   a(href='#') Профиль
+<<<<<<< HEAD
                   a(href='/logout') Выход
+=======
+                li
+                  a(href='#') Выход
+>>>>>>> 19cdea1864d651901f9d577aedd77223961d7490
 
 
     // Begin page content

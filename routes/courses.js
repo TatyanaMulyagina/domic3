@@ -60,12 +60,15 @@ router.get("/",function(req,res){
 
 router.get("/something",function(req,res){
   console.log('Here get something');
-  res.render('courses/popupWindow');
+  res.render('courses/test01');
 });
 
 router.get("/create",function(req,res){
   console.log('Here get /courses/createCourse');
-  res.render('courses/createCourse');
+    db.Material.findAll({}).success(function(mats){
+        res.render('courses/createCourse',{materials:mats});
+    })
+
 });
 
 router.get("/:courseId/edit",function(req,res){
@@ -161,6 +164,11 @@ router.post("/:courseId/remove",function(req,res){
   })// find
 });// end removeCourse
 
+
+router.get("/statistics",function(req,res){
+    console.log("Here post /courses/statistics")
+    res.render("courses/courseStatistics")
+});// end removeCourse
 //----------------------------- Materials ---------------------------
 
 router.get(/^\/([0-9]+\/*)+$/, function(req,res){

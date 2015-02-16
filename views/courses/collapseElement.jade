@@ -1,0 +1,16 @@
+div(class="panel-group folder", id="accordion", role="tablist", aria-multiselectable="true")
+    div(class="panel panel-info")
+        div(class="panel-heading", role="tab", id="headingOne")
+            div(class="panel-title")
+                a(data-toggle="collapse", class="folderName", data-parent="#accordion", href="#collapseOne", aria-expanded="false", aria-controls="collapseOne")
+                    Collapsible Item 3
+        div(id="collapseOne", class="panel-collapse collapse in connectedSortable ui-sortable folderBottom", role="tabpanel", aria-labelledby="headingOne")
+            li(class="ui-sortable-handle material") Item 1
+            li(class="ui-sortable-handle material") Item 2
+            div(class="panel-group folder", id="accordion2", role="tablist", aria-multiselectable="true")
+                div(class="panel panel-info")
+                    div(class="panel-heading", role="tab", id="headingOne2")
+                        div(class="panel-title")
+                            a(data-toggle="collapse", class="folderName", data-parent="#accordion2", href="#collapseOne2", aria-expanded="false", aria-controls="collapseOne2")
+                                Collapsible Item 3
+                    div(id="collapseOne2", class="panel-collapse collapse in connectedSortable ui-sortable folderBottom", role="tabpanel", aria-labelledby="headingOne2")

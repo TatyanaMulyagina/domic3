@@ -1,0 +1,10 @@
+extends ../layout
+block content
+    div(class="row")
+        div.col-md-12 Кнопки
+        div.col-md-5 col-md-5
+            each crs,ind in courses
+                ul #{crs.name}
+        div.col-md-2 col-md-2
+        div.col-md-5 col-md-5
+

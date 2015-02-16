@@ -1,5 +1,5 @@
-var usersRoutes = require('../routes/users');
-var db = require('../models');
+var usersRoutes = require('../routes/users')
+  , db = require('../models');
 
 module.exports.require = ['auth'];
 module.exports.init = function(app, modules, events) {
