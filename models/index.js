@@ -1,12 +1,12 @@
-var fs        = require('fs');
-var path      = require('path');
-var Sequelize = require('sequelize');
-var lodash    = require('lodash');
-var sequelize = new Sequelize('domic', 'admin', 'admin', {
+var fs        = require('fs')
+  , path      = require('path')
+  , Sequelize = require('sequelize')
+  , lodash    = require('lodash')
+  , sequelize = new Sequelize('domic', 'admin', 'admin', {
       dialect: 'postgres'
-  });
-var events = require('events');
-var db     = {};
+  })
+  , events = require('events')
+  , db        = {};
 
 sequelize.events = new events.EventEmitter();
 
@@ -16,8 +16,8 @@ fs
     return (file.indexOf('.') !== 0) && (file !== 'index.js')
   })
   .forEach(function(file) {
-    var model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
+    var model = sequelize.import(path.join(__dirname, file))
+    db[model.name] = model
   });
 
 Object.keys(db).forEach(function(modelName) {

@@ -1,14 +1,11 @@
 var bcrypt = require('bcrypt');
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('User', {
+  var User = sequelize.define('User', {
     email: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
     classMethods: {
-      associate: function(models) {
-        models.Role.hasMany(models.User);
-      }
     },
     instanceMethods: {
       validPassword: function(password, done) {
@@ -17,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
       hasAccess: function(right, object, done) {
         this.hasRight(right).success(function(res) {
           if (res) {
-            if (right.Model.isComplexRight(right.name)) {
-              right.Model.runComplexRightFunction(right.name, object, done);
+            if (right.Model.isCR(right.name)) {
+              right.Model.runCRFunction(right.name, object, done);
             } else {
               done(true);
             }
@@ -41,4 +38,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+
+  return User;
 };

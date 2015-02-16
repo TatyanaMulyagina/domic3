@@ -2,6 +2,9 @@ extends ../layout
 block content
   div(class="panel-body") Редактирование курса
   form(role="form", method="post", id="editCourse", action='/courses/#{data.id}/edit')
+    script
+      $.webshims.setOptions('forms-ext', {types: 'date'});
+      $.webshims.polyfill('forms forms-ext');
     div(class="form-group")
       label Название
       input(class="form-control", value="#{group.name}", type="text", name='name', form="editCourse", placeholder="Enter name")
